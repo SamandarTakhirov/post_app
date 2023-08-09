@@ -1,29 +1,36 @@
 abstract final class ApiConst {
-  static const baseUrl = String.fromEnvironment(
+  static const _baseUrl = String.fromEnvironment(
     "base_url",
-    defaultValue: "123",
+    defaultValue: "...",
   );
 
-  static const allPostsPath = "/posts";
-  static const searchPosts = "/posts/search";
-  static const createNewPostPath = "/posts/add";
+  static const apiKey = String.fromEnvironment(
+    "api_key",
+    defaultValue:  "..."
+  );
 
-  static String getPostFromId(int id) => "/posts/$id";
 
-  static String getPostFromUserID(int id) => "/posts/user/$id";
 
-  static String getPostComments(int id) => "/posts/$id/comments";
+  static const allPostsPath = "$_baseUrl/posts";
+  static const searchPosts = "$_baseUrl/posts/search";
+  static const createNewPostPath = "$_baseUrl/posts/add";
 
-  static String updatePost(int id) => "/posts/$id";
+  static String getPostFromId(int id) => "$_baseUrl/posts/$id";
 
-  static String deletePost(int id) => "/posts/$id";
+  static String getUserPosts(int id) => "$_baseUrl/posts/user/$id";
 
-  static Map<String, String> searchParams(String searchText) => {
-        "q": searchText,
+  static String getPostComments(int id) => "$_baseUrl/posts/$id/comments";
+
+  static String updatePost(int id) => "$_baseUrl/posts/$id";
+
+  static String deletePost(int id) => "$_baseUrl/posts/$id";
+
+  static Map<String, List<String>> searchParams(String searchText) => {
+        "q": [searchText],
       };
 
-  static Map<String, String> paginationParams(int limit, int skip) => {
-        "limit": limit.toString(),
-        "skip": skip.toString(),
+  static Map<String, List<String>> paginationParams(int limit, int skip) => {
+        "limit": [limit.toString()],
+        "skip": [skip.toString()],
       };
 }
